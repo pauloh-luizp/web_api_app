@@ -3,7 +3,7 @@ import 'package:web_api_app/models/pessoa.model.dart';
 import 'package:http/http.dart' as http;
 
 class PessoaRepository {
-  var url = 'http://klebersouza.pro.br/api/pessoas';
+  var url = 'https://klebersouza.pro.br/api/pessoas';
 
   Future<List<Pessoa>> getAll() async {
     final response = await http.get(url);
