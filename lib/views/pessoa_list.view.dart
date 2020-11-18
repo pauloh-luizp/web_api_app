@@ -18,7 +18,8 @@ class _PessoaListViewState extends State<PessoaListView> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("PUC APP"),
+        title: Text("Cadastrando"),
+        backgroundColor: Colors.orange[800],
         centerTitle: true,
       ),
       floatingActionButton: FloatingActionButton(
@@ -26,6 +27,7 @@ class _PessoaListViewState extends State<PessoaListView> {
           _showPessoaFormView();
         },
         child: Icon(Icons.add),
+        backgroundColor: Colors.orange[800],
       ),
       body: RefreshIndicator(
         onRefresh: () async {

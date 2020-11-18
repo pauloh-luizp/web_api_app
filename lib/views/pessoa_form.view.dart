@@ -2,6 +2,8 @@ import 'package:web_api_app/controllers/pessoa.controller.dart';
 import 'package:web_api_app/models/pessoa.model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class PessoaFormView extends StatefulWidget {
   final Pessoa pessoa;
@@ -21,11 +23,32 @@ class _PessoaFormViewState extends State<PessoaFormView> {
   final _tbairro = TextEditingController();
   final _tlocalidade = TextEditingController();
   final _tuf = TextEditingController();
+  String resultado;
 
   var _formKey = GlobalKey<FormState>();
 
   bool _isEdited = false;
   Pessoa _pessoa;
+
+  /*consultaCep() async {
+    String viacep = "https://viacep.com.br/ws/${_tCep}/json/";
+
+    http.Response response;
+
+    response = await http.get(viacep);
+
+    Map<Pessoa> retorno = json.decode(response.body);
+    
+    _tlogradouro = retorno["logradouro"];
+    _tcomplemento = retorno["complemento"];
+    _tbairro = retorno["bairro"];
+    _tlocalidade = retorno["localidade"];
+    _tuf = retorno["uf"];
+
+    setState(() {
+      resultado = "${_tlogradouro}";
+    });
+  }*/
 
   @override
   void initState() {
@@ -77,6 +100,7 @@ class _PessoaFormViewState extends State<PessoaFormView> {
       appBar: AppBar(
         title: Text("Pessoa"),
         centerTitle: true,
+        backgroundColor: Colors.orange[800],
       ),
       body: SingleChildScrollView(
           padding: EdgeInsets.all(15.0),
@@ -87,6 +111,18 @@ class _PessoaFormViewState extends State<PessoaFormView> {
               children: <Widget>[
                 _editText("Nome", _tNome, TextInputType.text),
                 _editText("CEP", _tCep, TextInputType.text),
+                RaisedButton(
+                    color: Colors.orange[800],
+                    child: Text(
+                      "Consultar",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 14,
+                      ),
+                    ),
+                    onPressed: () {
+                      //consultaCep();
+                    }),
                 _editText("Rua", _tlogradouro, TextInputType.text),
                 _editText("Complemento", _tcomplemento, TextInputType.text),
                 _editText("Bairro", _tbairro, TextInputType.text),
@@ -96,7 +132,7 @@ class _PessoaFormViewState extends State<PessoaFormView> {
                   margin: EdgeInsets.only(top: 10.0, bottom: 20),
                   height: 45,
                   child: RaisedButton(
-                    color: Colors.blue,
+                    color: Colors.orange[800],
                     child: Text(
                       "Salvar",
                       style: TextStyle(
@@ -130,7 +166,7 @@ class _PessoaFormViewState extends State<PessoaFormView> {
                     margin: EdgeInsets.only(top: 5.0, bottom: 5),
                     height: 45,
                     child: RaisedButton(
-                      color: Colors.red,
+                      color: Colors.red[900],
                       child: Text(
                         "Remover",
                         style: TextStyle(
@@ -146,8 +182,7 @@ class _PessoaFormViewState extends State<PessoaFormView> {
                               // return object of type Dialog
                               return AlertDialog(
                                 title: new Text("Exclusão de Registro"),
-                                content: new Text(
-                                    "Tem certeza que deseja excluir este registro?"),
+                                content: new Text("Opa vai excluir mesmo???"),
                                 actions: <Widget>[
                                   // usually buttons at the bottom of the dialog
                                   FlatButton(
